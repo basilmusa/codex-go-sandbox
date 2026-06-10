@@ -1,6 +1,8 @@
 docker run -it \
     --rm -v "$PWD:/workspace" \
-    -v "$HOME/.codex:/root/.codex" \
-    -w /workspace \
+    --user "$(id -u):$(id -g)" \
+    -e HOME=/home/coder \
+    -v "$HOME/.codex:/home/coder/.codex" \
+    -v "$PWD:$PWD" \
+    -w "$PWD" \
     codex-dev-agent
-
