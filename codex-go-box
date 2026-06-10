@@ -1,0 +1,6 @@
+docker run -it \
+    --rm -v "$PWD:/workspace" \
+    -v "$HOME/.codex:/root/.codex" \
+    -w /workspace \
+    codex-dev-agent
+
