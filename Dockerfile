@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/root/.local/bin:/usr/local/go/bin:${PATH}"
 
-ARG GO_VERSION=1.24.4
+ARG GO_VERSION=1.25.11
 
 RUN apt-get update && apt-get install -y \
     ca-certificates \
