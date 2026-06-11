@@ -1,8 +1,20 @@
+# --rm needed so that Ctrl+D stops the container
+# Required by testcontainers-go: exposes the host Docker daemon to tests running in this container.
+# Testcontainers creates sibling containers via the host daemon, not nested containers.
+# Environment $HOME 
+# .codex/ contains all necessary codex config, sessions, conversation history and should
+# be mapped
+# Creates the same folder path in docker as you have in your current directory
+# Switch your working space directory to PWD
+# Docker image name to run
+
 docker run -it \
-    --rm -v "$PWD:/workspace" \
+    --rm \
     --user "$(id -u):$(id -g)" \
-    -e HOME=/home/coder \
-    -v "$HOME/.codex:/home/coder/.codex" \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --group-add "$(stat -c '%g' /var/run/docker.sock)" \
+    -e HOME=/codex-config-dir \
+    -v "$HOME/.codex:/codex-config-dir/.codex" \
     -v "$PWD:$PWD" \
     -w "$PWD" \
-    codex-dev-agent
+    codex-dev-agent bash
