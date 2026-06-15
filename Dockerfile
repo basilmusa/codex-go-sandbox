@@ -18,7 +18,13 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     python3-venv \
+    vim \
+    less \
     && rm -rf /var/lib/apt/lists/*
+
+# Editor
+ENV VISUAL=vim
+ENV EDITOR=vim
 
 # Install Node 24
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
