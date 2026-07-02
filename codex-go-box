@@ -13,8 +13,7 @@ docker run -it \
     --user "$(id -u):$(id -g)" \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --group-add "$(stat -c '%g' /var/run/docker.sock)" \
-    -e HOME=/codex-config-dir \
     -v "$HOME/.codex:/codex-config-dir/.codex" \
     -v "$PWD:$PWD" \
     -w "$PWD" \
-    codex-dev-agent
+    codex-dev-agent "$@"
