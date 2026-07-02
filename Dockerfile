@@ -10,7 +10,7 @@ ARG PLAYWRIGHT_MCP_VERSION=0.0.77
 ARG CONTEXT7_MCP_VERSION=latest
 ARG OPENSPEC_VERSION=1.5.0
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     git \
