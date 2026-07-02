@@ -1,0 +1,12 @@
+[mcp_servers.playwright]
+command = "playwright-mcp"
+args = [
+  "--headless",
+  "--no-sandbox",
+  "--browser", "chrome",
+  "--executable-path", "/usr/bin/google-chrome",
+  "--isolated",
+  "--output-dir", "/tmp/playwright-mcp-output"
+]
+startup_timeout_ms = 30000
+

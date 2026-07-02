@@ -9,6 +9,7 @@ ARG CODEX_VERSION=0.142.5
 ARG PLAYWRIGHT_MCP_VERSION=0.0.77
 ARG CONTEXT7_MCP_VERSION=latest
 ARG OPENSPEC_VERSION=1.5.0
+ARG CHROME_DEVTOOLS_MCP_VERSION=1.4.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -68,6 +69,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
 RUN npm install -g \
     @openai/codex@${CODEX_VERSION} \
     @playwright/mcp@${PLAYWRIGHT_MCP_VERSION} \
+    chrome-devtools-mcp@${CHROME_DEVTOOLS_MCP_VERSION} \
     @upstash/context7-mcp@${CONTEXT7_MCP_VERSION} \
     @fission-ai/openspec@${OPENSPEC_VERSION}
 
@@ -86,9 +88,6 @@ RUN curl -fsSL "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" -o /tmp/go
     && rm -rf /usr/local/go \
     && tar -C /usr/local -xzf /tmp/go.tar.gz \
     && rm /tmp/go.tar.gz
-
-# Install Codex CLI using OpenAI's installer
-RUN npm install -g @openai/codex
 
 WORKDIR /workspace
 
