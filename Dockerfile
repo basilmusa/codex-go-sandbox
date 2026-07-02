@@ -3,7 +3,12 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/root/.local/bin:/usr/local/go/bin:${PATH}"
 
+# Pin versions
 ARG GO_VERSION=1.26.4
+ARG CODEX_VERSION=0.142.5
+ARG PLAYWRIGHT_MCP_VERSION=0.0.77
+ARG CONTEXT7_MCP_VERSION=latest
+ARG OPENSPEC_VERSION=1.5.0
 
 RUN apt-get update && apt-get install -y \
     ca-certificates \
@@ -60,11 +65,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Install openspec
-RUN npm install -g @fission-ai/openspec@latest
-
-# Install Playwright MCP for codex browser capabilities
-RUN npm install -g @playwright/mcp@latest @upstash/context7-mcp@latest
+RUN npm install -g \
+    @openai/codex@${CODEX_VERSION} \
+    @playwright/mcp@${PLAYWRIGHT_MCP_VERSION} \
+    @upstash/context7-mcp@${CONTEXT7_MCP_VERSION} \
+    @fission-ai/openspec@${OPENSPEC_VERSION}
 
 # Install Google Chrome system-wide.
 RUN mkdir -p /etc/apt/keyrings \
