@@ -10,6 +10,8 @@
 #
 docker run -it \
     --rm \
+    --init \
+    --shm-size=1g
     --user "$(id -u):$(id -g)" \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --group-add "$(stat -c '%g' /var/run/docker.sock)" \
