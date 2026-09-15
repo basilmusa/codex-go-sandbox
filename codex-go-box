@@ -3,6 +3,10 @@
 # -v docker.sock is required by testcontainers-go: exposes the host Docker daemon to tests running in this container.
 # Testcontainers creates sibling containers via the host daemon, not nested containers.
 #
+# The --add-host=host.docker.internal is needed to allow the container to connect
+# to a database on the host system listening on a specific port (e.g. PostgreSQL port
+# 5432).
+#
 # Creates the same folder path in docker as you have in your current directory
 #
 # Switch your working space directory to PWD
@@ -13,6 +17,7 @@ docker run -it \
     --init \
     --shm-size=1g \
     --user "$(id -u):$(id -g)" \
+    --add-host=host.docker.internal:host-gateway \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --group-add "$(stat -c '%g' /var/run/docker.sock)" \
     -v "$HOME/.codex:/codex-config-dir/.codex" \

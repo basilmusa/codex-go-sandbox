@@ -5,11 +5,11 @@ ENV PATH="/root/.local/bin:/usr/local/go/bin:${PATH}"
 
 # Pin versions
 ARG GO_VERSION=1.26.4
-ARG CODEX_VERSION=0.144.4
+ARG CODEX_VERSION=latest
 ARG PLAYWRIGHT_MCP_VERSION=0.0.77
 ARG CONTEXT7_MCP_VERSION=latest
 ARG OPENSPEC_VERSION=1.6.0
-ARG CHROME_DEVTOOLS_MCP_VERSION=1.4.0
+ARG CHROME_DEVTOOLS_MCP_VERSION=latest
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
