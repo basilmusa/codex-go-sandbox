@@ -1,5 +1,8 @@
 This is a codex sandbox with Go lang installed as well as other tools.
 
+Full documentation is available in [docs](docs/README.md), including installation,
+container behavior, MCP configuration, and GitBook setup.
+
 # Creating the container for the first time use
 
 First create the docker image:
@@ -30,8 +33,10 @@ If you need to start with bash instead of entering codex cli directly:
 codex-go-box bash
 ```
 
-This will create a codex sandboxed environment that can only access the current 
-folder. Gives it full access to the folder using `--danger-full-access`
+This creates a container with the current folder and your Codex configuration
+mounted, and starts Codex with `--sandbox danger-full-access`. The launcher also
+mounts the host Docker socket for Testcontainers, giving processes access to the
+host Docker daemon. See [access boundaries](docs/container.md#access-boundaries).
 
 # To upgrade go version, codex or openspec
 
