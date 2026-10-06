@@ -10,6 +10,7 @@ ARG PLAYWRIGHT_MCP_VERSION=0.0.77
 ARG CONTEXT7_MCP_VERSION=latest
 ARG OPENSPEC_VERSION=1.6.0
 ARG CHROME_DEVTOOLS_MCP_VERSION=latest
+ARG GOLANGCI_LINT_VERSION=2.5.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -89,7 +90,11 @@ RUN curl -fsSL "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" -o /tmp/go
     && tar -C /usr/local -xzf /tmp/go.tar.gz \
     && rm /tmp/go.tar.gz
 
+# Install golangci-lint
+RUN curl -sSfL https://golangci-lint.run/install.sh \
+    | sh -s -- -b /usr/local/bin v${GOLANGCI_LINT_VERSION} \
+    && golangci-lint --version
+
 WORKDIR /workspace
 
 CMD ["codex", "--sandbox", "danger-full-access"]
-
